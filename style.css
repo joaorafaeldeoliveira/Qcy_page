@@ -1,0 +1,610 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --primary-bg: linear-gradient(90deg, #474646, #909090);
+    --primary-color: #FFFFFF;
+    --accent-color: #FF8832;
+    --nav-opacity: 0.8;
+}
+
+
+body[data-theme="black"] {
+    background: linear-gradient(90deg, #474646, #909090);
+    --primary-color: #FFFFFF;
+    --accent-color: #FF8832;
+    --nav-opacity: 0.8;
+}
+
+body[data-theme="silver"] {
+    background: linear-gradient(90deg, #E0E0E0, #B0B0B0);
+    --primary-color: #333333;
+    --accent-color: #FF8832;
+    --nav-opacity: 0.9;
+}
+
+body[data-theme="purple"] {
+    background: linear-gradient(90deg, #6B46C1, #9F7AEA);
+    --primary-color: #FFFFFF;
+    --accent-color: #FF8832;
+    --nav-opacity: 0.8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+body {
+    overflow-x: hidden;
+    transition: background 0.8s ease;
+}
+
+.logo img {
+    width: 110px;
+    height: auto;
+    display: block;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 5%;
+    color: var(--primary-color);
+    max-width: 1400px;
+    margin: 0 auto;
+    transition: color 0.8s ease;
+}
+
+nav a {
+    font-size: 16px;
+    text-decoration: none;
+    color: var(--primary-color);
+    opacity: var(--nav-opacity);
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    opacity: 1;
+    color: var(--accent-color);
+}
+
+.icons {
+    display: flex;
+    gap: 30px;
+    opacity: var(--nav-opacity);
+    transition: opacity 0.8s ease;
+}
+
+.icons * {
+    cursor: pointer;
+}
+
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 600px;
+    padding: 0 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.text-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    height: 100%;
+    min-height: 600px;
+    color: var(--primary-color);
+    flex: 1;
+    max-width: 600px;
+    transition: color 0.8s ease;
+}
+
+.text-area h1 {
+    font-size: 40px;
+}
+
+.text-area h3 {
+    opacity: 0.5;
+    font-size: 16px;
+}
+
+.circle-area {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.circle1, .circle2, .circle3 {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.circle1:hover, .circle2:hover, .circle3:hover {
+    transform: scale(1.1);
+}
+
+.circle1.active, .circle2.active, .circle3.active {
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    transform: scale(1.1);
+}
+
+.circle1 {
+    background-color: #201F1F;
+}
+
+.circle2 {
+    background-color: #E8DDDD;
+}
+
+.circle3 {
+    background-color: #A54DCF;
+}
+
+.button {
+    display: inline-flex;
+    background-color: var(--accent-color);
+    width: fit-content;
+    justify-content: center;
+    border-radius: 100px;
+    padding: 12px 24px;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+
+    background-color:orange ;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.button a {
+    text-decoration: none;
+    color: #201F1F;
+    font-weight: bold;
+}
+
+.phones-container {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    flex-shrink: 0;
+}
+
+.Phone-image, .Phone-image-secundary, .Phone-image-third {
+    position: absolute;
+    bottom: 0;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+
+.Phone-image {
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    width: 500px;
+}
+
+.Phone-image.active {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+.Phone-image.exiting {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.9);
+}
+
+.Phone-image-secundary {
+    left: 50%;
+    transform: translateX(10%);
+    opacity: 0.7;
+    z-index: 2;
+    width: 350px;
+}
+
+.Phone-image-secundary.active {
+    opacity: 0.7;
+    transform: translateX(10%) scale(1);
+}
+
+.Phone-image-secundary.exiting {
+    opacity: 0;
+    transform: translateX(10%) scale(0.9);
+}
+
+.Phone-image-third {
+    left: 50%;
+    transform: translateX(-110%);
+    opacity: 0.7;
+    z-index: 1;
+    width: 350px;
+}
+
+.Phone-image-third.active {
+    opacity: 0.7;
+    transform: translateX(-110%) scale(1);
+}
+
+.Phone-image-third.exiting {
+    opacity: 0;
+    transform: translateX(-110%) scale(0.9);
+}
+
+.Phone-image img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.3));
+}
+
+.Phone-image-secundary img, 
+.Phone-image-third img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+
+
+
+.Phone-image.active {
+    animation: slideInCenter 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.Phone-image-secundary.active {
+    animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s backwards;
+}
+
+.Phone-image-third.active {
+    animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s backwards;
+}
+.phone-center, .phone-right, .phone-left {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.phone-center {
+    z-index: 3;
+}
+
+.phone-right {
+    z-index: 2;
+}
+
+.phone-left {
+    z-index: 1;
+}
+
+.Phone-image, .Phone-image-secundary, .Phone-image-third {
+    position: absolute;
+    bottom: 0;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.center-phone {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+}
+
+.center-phone.active {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+.center-phone.exiting {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.9);
+}
+
+.right-phone {
+    left: 50%;
+    transform: translateX(10%);
+    width: 350px;
+}
+
+.right-phone.active {
+    opacity: 0.7;
+    transform: translateX(10%) scale(1);
+}
+
+.right-phone.exiting {
+    opacity: 0;
+    transform: translateX(10%) scale(0.9);
+}
+
+.left-phone {
+    left: 50%;
+    transform: translateX(-110%);
+    width: 350px;
+}
+
+.left-phone.active {
+    opacity: 0.7;
+    transform: translateX(-110%) scale(1);
+}
+
+.left-phone.exiting {
+    opacity: 0;
+    transform: translateX(-110%) scale(0.9);
+}
+
+.Phone-image img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.3));
+}
+
+.Phone-image-secundary img, 
+.Phone-image-third img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes slideInCenter {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20%) scale(0.9);
+    }
+    to {
+        opacity: 0.7;
+        transform: translateX(10%) scale(1);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-120%) scale(0.9);
+    }
+    to {
+        opacity: 0.7;
+        transform: translateX(-110%) scale(1);
+    }
+}
+
+.center-phone.active {
+    animation: slideInCenter 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.right-phone.active {
+    animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s backwards;
+}
+
+.left-phone.active {
+    animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s backwards;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1000;
+}
+
+.hamburger span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.nav-links {
+    display: flex;
+    gap: 40px;
+}
+
+/* Menu Mobile */
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    padding: 40px 20px;
+}
+
+.mobile-menu-content a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 24px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-menu-content a:hover {
+    opacity: 1;
+    color: var(--accent-color);
+}
+
+.mobile-icons {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.mobile-icons svg {
+    stroke: var(--primary-color);
+    cursor: pointer;
+}
+
+
+@media (max-width: 1200px) {
+    .banner {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 30px;
+    }
+    
+    .text-area {
+        align-items: center;
+        padding-bottom: 40px;
+        max-width: 100%;
+    }
+    
+    .phones-container {
+        margin-top: 30px;
+        width: 100%;
+        max-width: 800px;
+        height: 500px;
+        order: -1; /* Isso coloca as imagens acima no mobile */
+    }
+    
+    .Phone-image {
+        width: 400px;
+    }
+    
+    .Phone-image-secundary, 
+    .Phone-image-third {
+        width: 280px;
+    }
+}
+
+@media (max-width: 992px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .icons {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .mobile-menu {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        padding: 20px 5%;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .phones-container {
+        height: 400px;
+        order: -1; 
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .Phone-image {
+        width: 300px;
+    }
+    
+    .Phone-image-secundary, 
+    .Phone-image-third {
+        width: 200px;
+    }
+    
+    .text-area h1 {
+        font-size: 32px;
+    }
+    
+    .banner {
+        padding-top: 0;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .phones-container {
+        height: 300px;
+        order: -1; 
+    }
+    
+    .Phone-image {
+        width: 250px;
+    }
+    
+    .Phone-image-secundary, 
+    .Phone-image-third {
+        width: 150px;
+    }
+    
+    .circle-area {
+        gap: 15px;
+    }
+    
+    .circle1, .circle2, .circle3 {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .text-area {
+        min-height: auto;
+        padding-bottom: 20px;
+    }
+}
