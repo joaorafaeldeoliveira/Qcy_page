@@ -1160,4 +1160,55 @@ footer > p {
         min-height: auto;
         padding-bottom: 20px;
     }
+    
+}
+@media (min-width: 480px) {
+  .phones-container {
+    height: 320px;
+  }
+  
+  .center-phone {
+    width: 260px;
+  }
+  
+  .right-phone, .left-phone {
+    width: 170px;
+  }
+  
+  .collections-itens {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .collection-card-headphone, .collection-card-fone, .collection-card-OpenEar, .collection-card-Watch {
+    height: 180px;
+    max-width: none;
+  }
+  
+  .highlight-items {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .testimonials-area {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 375px) {
+  .phones-container {
+    height: 300px;
+  }
+  
+  .center-phone {
+    width: 240px;
+  }
+  
+  .right-phone, .left-phone {
+    width: 160px;
+  }
+  
+  .collection-card-headphone, .collection-card-fone, .collection-card-OpenEar, .collection-card-Watch {
+    height: 200px;
+    max-width: 340px;
+  }
 }
