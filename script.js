@@ -1,11 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const colorButtons = document.querySelectorAll('.color-btn');
-    const centerPhones = document.querySelectorAll('.center-phone');
-    const rightPhones = document.querySelectorAll('.right-phone');
-    const leftPhones = document.querySelectorAll('.left-phone');
     const body = document.body;
     
-
     const themeConfig = {
         'black': {
             center: 'black',
@@ -56,15 +52,14 @@ document.addEventListener('DOMContentLoaded', function() {
         showPhoneInPosition('left', themeConfig[currentTheme].left, true);
         
         setTimeout(() => {
-
             showPhoneInPosition('center', themeConfig[theme].center, false);
             showPhoneInPosition('right', themeConfig[theme].right, false);
             showPhoneInPosition('left', themeConfig[theme].left, false);
             
             setTimeout(() => {
-                centerPhones.forEach(phone => phone.classList.remove('exiting'));
-                rightPhones.forEach(phone => phone.classList.remove('exiting'));
-                leftPhones.forEach(phone => phone.classList.remove('exiting'));
+                document.querySelectorAll('.center-phone, .right-phone, .left-phone').forEach(phone => {
+                    phone.classList.remove('exiting');
+                });
             }, 800);
         }, 100);
         
@@ -79,50 +74,134 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     function initializePhones() {
-        centerPhones.forEach(phone => phone.classList.remove('active', 'exiting'));
-        rightPhones.forEach(phone => phone.classList.remove('active', 'exiting'));
-        leftPhones.forEach(phone => phone.classList.remove('active', 'exiting'));
-        
         showPhoneInPosition('center', 'black', false);
         showPhoneInPosition('right', 'silver', false);
         showPhoneInPosition('left', 'purple', false);
     }
     
-
     initializePhones();
+
+    const searchToggle = document.getElementById('searchToggle');
+    const searchInput = document.getElementById('searchInput');
+    const iconsContainer = document.getElementById('iconsContainer');
     
-    console.log('Center phones found:', centerPhones.length);
-    console.log('Right phones found:', rightPhones.length);
-    console.log('Left phones found:', leftPhones.length);
-    console.log('All elements should be 3. If not, check your HTML structure.');
-});
+    let isSearchActive = false;
+    
+    if (searchToggle) {
+        searchToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            if (!isSearchActive) {
+                iconsContainer.classList.add('search-active');
+                isSearchActive = true;
+                
+                setTimeout(() => {
+                    searchInput.focus();
+                }, 300);
+            } else {
+                closeSearch();
+            }
+        });
 
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-const mobileLinks = mobileMenu.querySelectorAll('a');
-
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
-    if (mobileMenu.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = 'auto';
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isSearchActive) {
+                closeSearch();
+            }
+            if (e.key === 'Enter' && isSearchActive && document.activeElement === searchInput) {
+                const query = searchInput.value.trim();
+                if (query) {
+                    alert(`Buscando por: "${query}"`);
+                    searchInput.value = '';
+                    closeSearch();
+                }
+            }
+        });
+        
+        document.addEventListener('click', function(e) {
+            if (isSearchActive && 
+                !searchToggle.contains(e.target) && 
+                !searchInput.contains(e.target)) {
+                closeSearch();
+            }
+        });
+        
+        function closeSearch() {
+            iconsContainer.classList.remove('search-active');
+            isSearchActive = false;
+            searchInput.value = '';
+        }
     }
-});
-
-mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('active');
+    
+    const hamburger = document.getElementById('hamburgerMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        if (mobileMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    });
+    
+    mobileMenu.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    const mobileSearchToggle = document.getElementById('mobileSearchToggle');
+    const mobileSearchOverlay = document.getElementById('mobileSearchOverlay');
+    const closeSearchMobile = document.getElementById('closeSearchMobile');
+    
+    mobileSearchToggle.addEventListener('click', () => {
+        mobileSearchOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    closeSearchMobile.addEventListener('click', () => {
+        mobileSearchOverlay.classList.remove('active');
         document.body.style.overflow = 'auto';
     });
-});
-
-mobileMenu.addEventListener('click', (e) => {
-    if (e.target === mobileMenu) {
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
+    
+    mobileSearchOverlay.addEventListener('click', (e) => {
+        if (e.target === mobileSearchOverlay) {
+            mobileSearchOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    const mobileSearchInput = mobileSearchOverlay.querySelector('input');
+    mobileSearchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const query = mobileSearchInput.value.trim();
+            if (query) {
+                alert(`Buscando por: "${query}"`);
+                mobileSearchInput.value = '';
+                mobileSearchOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+    });
+    
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 992) {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            mobileSearchOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
 });
